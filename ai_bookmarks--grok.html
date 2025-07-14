@@ -1,0 +1,86 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE NETSCAPE-Bookmark-file-1>
+<!-- This is an automatically generated file.
+     It will be read and overwritten.
+     DO NOT EDIT! -->
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>AI Websites Bookmarks</TITLE>
+<H1>AI Tools Collection</H1>
+<DL><p>
+    <DT><H3 ADD_DATE="1734205020" LAST_MODIFIED="1734205020">AI Image Generation</H3>
+    <DL><p>
+        <DT><A HREF="https://www.midjourney.com/" ADD_DATE="1734205020">MidJourney - AI Image Generator</A>
+        <DT><A HREF="https://www.fotor.com/" ADD_DATE="1734205020">Fotor - AI Photo Editing and Image Generation</A>
+        <DT><A HREF="https://leonardo.ai/" ADD_DATE="1734205020">Leonardo AI - Production-Quality AI Art Assets</A>
+        <DT><A HREF="https://aiart.fm/" ADD_DATE="1734205020">AIArt.fm - Create Unique AI Artwork</A>
+    </DL><p>
+    <DT><H3 ADD_DATE="1734205020" LAST_MODIFIED="1734205020">AI Text and Content Generation</H3>
+    <DL><p>
+        <DT><A HREF="https://chat.openai.com/" ADD_DATE="1734205020">ChatGPT - Conversational AI Chatbot</A>
+        <DT><A HREF="https://www.jasper.ai/" ADD_DATE="1734205020">Jasper AI - Content Writing Assistant</A>
+        <DT><A HREF="https://writesonic.com/" ADD_DATE="1734205020">Writesonic - AI Writing for Blogs and Marketing</A>
+        <DT><A HREF="https://copy.ai/" ADD_DATE="1734205020">Copy.ai - High-Quality Content Generation</A>
+        <DT><A HREF="https://www.perfectessaywriter.ai/" ADD_DATE="1734205020">PerfectEssayWriter AI - Essay Writing Tool</A>
+    </DL><p>
+    <DT><H3 ADD_DATE="1734205020" LAST_MODIFIED="1734205020">AI Video Generation</H3>
+    <DL><p>
+        <DT><A HREF="https://www.synthesia.io/" ADD_DATE="1734205020">Synthesia - AI Video Creation with Avatars</A>
+        <DT><A HREF="https://spiritme.tech/" ADD_DATE="1734205020">Spiritme - Instant Video with Digital Avatars</A>
+        <DT><A HREF="https://labs.google/" ADD_DATE="1734205020">Google Labs - Veo 3 AI Filmmaking Tool</A>
+        <DT><A HREF="https://dumme.com/" ADD_DATE="1734205020">Dumme - Short Videos from Long Content</A>
+    </DL><p>
+    <DT><H3 ADD_DATE="1734205020" LAST_MODIFIED="1734205020">AI Website Builders</H3>
+    <DL><p>
+        <DT><A HREF="https://www.squarespace.com/" ADD_DATE="1734205020">Squarespace - Blueprint AI Website Builder</A>
+        <DT><A HREF="https://10web.io/" ADD_DATE="1734205020">10Web - AI-Powered WordPress Site Builder</A>
+        <DT><A HREF="https://www.lovable.app/" ADD_DATE="1734205020">Lovable - No-Code AI App and Website Builder</A>
+    </DL><p>
+    <DT><H3 ADD_DATE="1734205020" LAST_MODIFIED="1734205020">AI Audio and Music</H3>
+    <DL><p>
+        <DT><A HREF="https://www.elevenlabs.io/" ADD_DATE="1734205020">ElevenLabs - AI Voice Generation and Cloning</A>
+        <DT><A HREF="https://suno.ai/" ADD_DATE="1734205020">Suno AI - AI Music and Song Generator</A>
+        <DT><A HREF="https://mubert.com/" ADD_DATE="1734205020">Mubert - AI-Generated Music for Creators</A>
+    </DL><p>
+    <DT><H3 ADD_DATE="1734205020" LAST_MODIFIED="1734205020">AI Productivity and Automation</H3>
+    <DL><p>
+        <DT><A HREF="https://www.browse.ai/" ADD_DATE="1734205020">Browse AI - No-Code Web Data Scraping</A>
+        <DT><A HREF="https://n8n.io/" ADD_DATE="1734205020">n8n - No-Code Automation Workflows</A>
+        <DT><A HREF="https://notion.ai/" ADD_DATE="1734205020">Notion AI - Workspace Productivity
